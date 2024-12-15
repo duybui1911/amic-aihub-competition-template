@@ -1,0 +1,113 @@
+title: "AMIC - AI CHALLENGE 2024 - AUTOGRADE INNOVATION"
+description: "Self-contained test competition bundle."
+image: test.jpg
+has_registration: True
+force_submission_to_leaderboard: True   # If false, participants must submit manually.
+disallow_leaderboard_modifying: True    # If true, submissions cannot be changed.
+enable_detailed_results: True           # True if html file written
+allow_teams: true
+enable_forum: true
+anonymous_leaderboard: false
+start_date: 2024-12-02 00:00:00+00:00
+end_date: 2024-12-29 17:00:00+00:00
+competition_docker_image: continuumio/anaconda:latest
+html: 
+    overview: overview.html             # Detailed competition description.
+    evaluation: evaluation.html         # Instructions and evaluation metrics.
+    terms: terms_and_conditions.html    # Rules and prizes.
+    data: data.html                     # Datasets from phases:datasets are appended here.
+    Q&A: additionalPage1.html
+phases:
+    1:
+        color: green
+        phasenumber: 1
+        label: "Warm-up phase"
+        description: 'Các đội thi tìm hiểu về cấu trúc dữ liệu train, test và
+         lựa chọn model.'
+        start_date: 2024-12-15  # Phase start (ends when new phase begins)
+        max_submissions: 100    # Total number of submissions per phase allowed
+        max_submissions_per_day: 10  # Maximum number of submissions per day
+        force_best_submission_to_leaderboard: True
+        phase_never_ends: False
+        #input_data: input.zip   # there is no need for input data if is_scoring_only == True (no code execution)
+        scoring_program: scoring_program.zip   # scoring program
+        reference_data: ref_valid.zip
+        datasets:               # these are appended to data.html
+            1:
+                name: Traindata
+                url: https://t.ly/amic-aichallenge2-trainningset
+                description: Traindata
+            2:
+                name: Warm-up phase data
+                url: https://t.ly/amic-aichalleng2-warmupdata
+                description: PublicTest Demo
+    2:
+        phasenumber: 2
+        label: "Public test phase 1"
+        description: "Đào tạo model và đánh giá kết quả trên tập testdata1,
+         nộp file kết quả có được lên hệ thống."
+        color: orange
+        start_date: 2024-12-22 00:00:00+00:00   # Phase start (ends when competition ends)
+        # end_date: 2024-12-23 23:59:00+00:00      # Phase start (ends when competition ends)
+        max_submissions: 1000
+        max_submissions_per_day: 10
+        # is_scoring_only: True      # if false: code submission
+        execution_time_limit: 300   # (in sec) must be given when code submission enabled
+        scoring_program: scoring_program.zip
+        reference_data: ref_test.zip
+        force_best_submission_to_leaderboard: True
+        phase_never_ends: False
+        datasets:               # these are appended to data.html
+            1:
+                name: Puclic Testdata1
+                url: https://t.ly/amic-aichallenge2-publictest1
+                description: Puclic Testdata1
+    3:
+        color: blue
+        phasenumber: 3
+        label: "Private test phase 2"
+        description: 'Thí sinh sẽ được cung cấp một bộ dữ liệu testdata2 mới để đánh giá mô hình.
+         Các đội nộp file kết quả có được lên hệ thống.'
+        start_date: 2024-12-24 00:00:00+00:00   # Phase start (ends when competition ends)
+        # end_date: 2024-12-25 23:59:00+00:00      # Phase start (ends when competition ends)
+        max_submissions: 1000
+        max_submissions_per_day: 10
+        scoring_program: scoring_program.zip
+        reference_data: ref_test.zip
+        force_best_submission_to_leaderboard: True
+        phase_never_ends: False
+        datasets:               # these are appended to data.html
+            1:
+                name: Puclic Testdata2
+                url: https://t.ly/amic-aichallenge2-publictest2
+                description: Puclic Testdata2
+    4:
+        color: purple
+        phasenumber: 4
+        label: "Final phase"
+        description: 'Các đội thi sẽ đánh giá mô hình trên bộ private test cuối cùng và chuẩn bị bài thuyết 
+        trình trước BGK.'
+        start_date: 2024-12-29 08:00:00+00:00   # Phase start (ends when competition ends)
+        # end_date: 2024-12-29 11:59:00+00:00      # Phase start (ends when competition ends)
+        max_submissions: 1000
+        max_submissions_per_day: 10
+        scoring_program: scoring_program.zip
+        reference_data: ref_test.zip
+        force_best_submission_to_leaderboard: True
+        phase_never_ends: False
+        datasets:               # these are appended to data.html
+            1:
+                name: Final Test
+                url: https://t.ly/amic-aichallenge2-finaltest
+                description: Final Test
+leaderboard:
+    leaderboards:
+        RESULTS: &RESULTS
+            label: Results
+            rank: 1
+    columns:
+        correct:
+            leaderboard: *RESULTS
+            label: correct
+            rank: 1
+            numeric_format: 1
